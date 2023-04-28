@@ -1,5 +1,5 @@
 metadata:
-    name: xen
+    name: kvm
     format: "Lava-Test Test Definition 1.0"
     description: "Start KVM for secondary testing"
     maintainer:
@@ -8,7 +8,7 @@ metadata:
         - functional
         - virtualization
     os:
-        - debian
+        - ubuntu
     devices:
         - arndale
         - vexpress-tc2
@@ -30,8 +30,11 @@ params:
     # how much RAM allocate to guest
     GUEST_RAM: "1024"
 
+
 run:
     steps:
+        - echo "fail"
+        - exit 1
         - cd ./automated/linux/kvm
         - "lava-test-case kvm-init --shell [ -c /dev/kvm ]"
         - sudo ./start-kvm.sh $GUEST_ARCH $GUEST_IMAGE $GUEST_FIRMWARE $GUEST_KERNEL $GUEST_CORES $GUEST_RAM
